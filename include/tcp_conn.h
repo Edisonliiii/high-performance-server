@@ -15,7 +15,7 @@ private:
 public:
   tcp_conn(int conndf, event_loop* loop) { init(connfd, loop); }
 
-  void init();
+  void init(int connfd, event_loop* loop);
   void handle_read();
   void handle_write();
   void clean_conn();

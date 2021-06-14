@@ -23,7 +23,7 @@ class io_buffer
 // data mmber
 public:
   int capacity;     // 总的可用长度
-  int length;       // 记录的是待读取区域的长度
+  int length;       // 记录的是待读取区域的长度, payload
   int head;         // header
   io_buffer* next;
   char* data;       // workload
@@ -94,7 +94,7 @@ public:
   io_buffer* alloc() {return alloc(u4K);}
   void revert(io_buffer* buffer);          //将闲置区块返回给内存池
 private:
-// 3 rule
+  // 3 rule
   buffer_pool();
   buffer_pool(const buffer_pool&);
   const buffer_pool& operator=(const buffer_pool&);
