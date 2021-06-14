@@ -11,8 +11,8 @@ class thread_pool
 {
 private:
   int _curr_index;
-  int _thread_cnt;
-  thread_queue<queue_msg>** _pool;
+  int _thread_cnt;                      // #thread
+  thread_queue<queue_msg>** _pool;      // 线程池当中的thread_queue是链表式管理
   pthread_t* _tids;
 public:
   thread_pool(int thread_cnt);

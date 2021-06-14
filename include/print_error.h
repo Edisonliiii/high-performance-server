@@ -22,7 +22,7 @@
 
 #define error_log(fmt, args...) error_if(1, fmt, ##args)
 
-
+// various parameters could be used as error handler
 inline void exit_if(int condition, const char *fmt, ...)
 {
     va_list arglist;

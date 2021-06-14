@@ -211,7 +211,7 @@ void event_loop::add_task(pendingFunc func, void* args)
   _pendingFactors.push_back(item);
 }
 
-/* run all the tasks in _pendingFactors and then delete
+/* run all the tasks in _pendingFactors and then delete all
  */
 void event_loop::run_task()
 {
