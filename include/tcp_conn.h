@@ -9,10 +9,10 @@
 class tcp_conn : public net_commu
 {
 private:
-  int _connfd;
-  event_loop* _loop;
-  input_buffer ibuf;
-  output_buffer obuf;
+  int _connfd;        // fd
+  event_loop* _loop;  // event loop
+  input_buffer ibuf;  // input buffer
+  output_buffer obuf; // output buffer
 public:
   tcp_conn(int conndf, event_loop* loop) { init(connfd, loop); }
 

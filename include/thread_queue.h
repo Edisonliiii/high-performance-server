@@ -10,13 +10,15 @@
 #include <sys/eventfd.h>
 #include "event_loop.h"
 
+// 本质是一个事件队列
+
 template <typename T>
 class thread_queue
 {
   private:
     int _evfd;
     event_loop* _loop;
-    std::queue<T> _queue;
+    std::queue<T> _queue; // thread_queue per se
     pthread_mutex_t _mutex;
 
   public:

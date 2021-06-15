@@ -10,10 +10,10 @@ extern void* thread_domain(void* args);
 class thread_pool
 {
 private:
-  int _curr_index;
-  int _thread_cnt;                      // #thread
-  thread_queue<queue_msg>** _pool;      // 线程池当中的thread_queue是链表式管理
-  pthread_t* _tids;
+  int _curr_index;                      // starts from 0
+  int _thread_cnt;                      // #thread [0,30)
+  thread_queue<queue_msg>** _pool;      // 线程池当中的thread_queue是链表式管理, thread_pool per se, args
+  pthread_t* _tids;                     // multitheads per se, methods
 public:
   thread_pool(int thread_cnt);
   thread_queue<queue_msg>* get_next_thread();

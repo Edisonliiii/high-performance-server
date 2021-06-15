@@ -11,17 +11,17 @@
 class tcp_server
 {
 private:
-  int _sockfd;                  // socket fd
+  int _sockfd;                  // socket fd for current tcp_server, listening socket
   int _reservfd;
   event_loop* _loop;            // event_loop
   thread_pool* _thd_pool;       // ptr to thread_pool, only useful under multi-threading pool
-  struct sockaddr_in _connaddr; // server address
-  socklen_t _addrlen;
+  struct sockaddr_in _connaddr; // client address
+  socklen_t _addrlen;           // addr length
   bool _keepalive;              // keep-alive option
 
   static int _conns_size;
   static int _max_conns;
-  static int _curr_conns;
+  static int _curr_conns;       // # connections
   static pthread_mutex_t _mutex;
 
 public:
