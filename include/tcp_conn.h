@@ -5,6 +5,7 @@
 #include "io_buffer.h"
 #include "net_commu.h"
 
+// inherit from net_commu, this pointer could be used as net_commu type
 class tcp_conn : public net_commu
 {
 private:

@@ -11,13 +11,13 @@
 class tcp_server
 {
 private:
-  int _sockfd;
+  int _sockfd;                  // socket fd
   int _reservfd;
-  event_loop* _loop;
-  thread_pool* _thd_pool;
-  struct sockaddr_in _connaddr;
+  event_loop* _loop;            // event_loop
+  thread_pool* _thd_pool;       // ptr to thread_pool, only useful under multi-threading pool
+  struct sockaddr_in _connaddr; // server address
   socklen_t _addrlen;
-  bool _keepalive;
+  bool _keepalive;              // keep-alive option
 
   static int _conns_size;
   static int _max_conns;
@@ -34,6 +34,23 @@ public:
 
   static void onConnBuild(conn_callback cb) { connBuildCb = cb; }
   static void onConnClose(conn_callback cb) { connCloseCb = cb; }
+
+public:
+  tcp_server(event_loop* loop, const char* ip, uint16_t port);
+  ~tcp_server(); // 本质上不需要析构函数
+
+  void keep_alive() { _keepalive = true; }
+  void do_accept();
+  void add_msg_cb(int cmdid, msg_callback* msg_cb, void* usr_data = nullptr) 
+  { 
+    dispatcher.add_msg_cb(cmdid, msg_cb, usr_data);
+  }
+  static void inc_conn();
+  static void get_conn_num(int& cnt);
+  static void dec_conn();
+
+  event_loop* loop() { return _loop; }
+  thread_pool* threadPool() { return _thd_pool; }
 }; // tcp_server
 
 #endif

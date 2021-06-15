@@ -6,7 +6,7 @@
 #include <ext/hash_map>
 #include "net_commu.h"
 
-
+// define a function pointer
 typedef void msg_callback(const char* data, uint32_t len, int cmdid, net_commu* commu, void* usr_data);
 
 class msg_dispatcher
@@ -16,7 +16,7 @@ private:
   __gnu_cxx::hash_map<int, void*> _args;
 public:
   msg_dispatcher() {}
-  
+  // 由cmdid 控制的 cb(args)
   int add_msg_cd(int cmdid, msg_callback* msg_cb, void* usr_data)
   {
     if (_dispatcher.find(cmdid) != _dispatcher.end()) return -1;
@@ -35,7 +35,7 @@ public:
     assert(exist(cmdid));
     msg_callback* func = _dispatcher[cmdid];
     void* usr_data = _args[cmdid];
-    func(data, len, cmdid, commu, usr_data);
+    func(data, len, cmdid, commu, usr_data); // combine and call it
   }
 };
 

@@ -34,8 +34,9 @@ void tcp_conn::init(int connfd, event_loop* loop)
   int ret = ::setsockopt(_connfd, IPPROTO_TCP, TCP_NODELAY, &opend, sizeof(opend));
   error_if(ret<0, "setsockopt TCP_NODELAY");
 
+  // call user defined cb on building
   if(tcp_server::connBuildCb) tcp_server::connBuildCb(this);
-
+  // 将当前事件放到epoll的监听集合当中
   _loop->add_ioev(_connfd, tcp_rcb, EPOLLIN, this);
   tcp_server::inc_conn();
 }

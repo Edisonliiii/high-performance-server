@@ -10,6 +10,7 @@ struct commu_head
 };
 
 // for acceptor communication with connections for give task to sub-thread
+// thread之间传递的数据类型
 struct queue_msg
 {
   enum MSG_TYPE                              // message type

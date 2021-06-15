@@ -12,7 +12,7 @@
 void msg_coming_cb(event_loop* loop, int fd, void* args)
 {
   thread_queue<queue_msg>* queue = (thread_queue<queue_msg>*) args;
-  std::queue<queue_msg> msgs; // msg队列
+  std::queue<queue_msg> msgs; // msg队列, 是当前函数的直接操作对象, 说明queue把内部的queue的值swap给了msgs 自己变成了空 然后直接操作msgs
   queue->recv_msg(msgs);
   while(!msgs.empty())
   {
@@ -38,7 +38,7 @@ void msg_coming_cb(event_loop* loop, int fd, void* args)
     }
     else
     {
-      // coming.....
+      // other msg between threads
     }
   }
 }

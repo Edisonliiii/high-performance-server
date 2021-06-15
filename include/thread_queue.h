@@ -38,6 +38,7 @@ class thread_queue
       ::close(_evfd);
     }
 
+    // 将前面传过来的queue_msg 直接写到evfd当中
     void send_msg(const T& item)
     {
       unsigned long long number = 1; // buf
@@ -48,6 +49,7 @@ class thread_queue
       ::pthread_mutex_unlock(&_mutex);
     }
 
+    // 直接从evfd读取
     void recv_msg(std::queue<T>& tmp_queue)
     {
       unsigned long long number;
